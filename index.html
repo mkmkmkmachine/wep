@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bolas Flotando en A-Frame</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script>
+      AFRAME.registerComponent('float', {
+        schema: {
+          speed: {type: 'number', default: 1},
+          height: {type: 'number', default: 1}
+        },
+        tick: function (time, timeDelta) {
+          let el = this.el;
+          let position = el.getAttribute('position');
+          position.y = Math.sin(time / 1000 * this.data.speed) * this.data.height + 1;
+          el.setAttribute('position', position);
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Crear muchas bolas flotantes -->
+      <a-entity>
+        <!-- Bola flotante 1 -->
+        <a-sphere position="-2 1 -3" radius="0.5" color="#4CC3D9" float="speed: 1; height: 1.5"></a-sphere>
+        <!-- Bola flotante 2 -->
+        <a-sphere position="0 1.25 -5" radius="0.75" color="#EF2D5E" float="speed: 1.5; height: 1.5"></a-sphere>
+        <!-- Bola flotante 3 -->
+        <a-sphere position="2 1 -3" radius="0.5" color="#FFC65D" float="speed: 2; height: 1.5"></a-sphere>
+        <!-- Bola flotante 4 -->
+        <a-sphere position="-1 2 -4" radius="0.6" color="#FF5733" float="speed: 1.2; height: 1.5"></a-sphere>
+        <!-- Bola flotante 5 -->
+        <a-sphere position="1 1.5 -4" radius="0.7" color="#9B59B6" float="speed: 0.8; height: 1.5"></a-sphere>
+        <!-- Bola flotante 6 -->
+        <a-sphere position="3 2 -6" radius="0.4" color="#28B463" float="speed: 1.7; height: 1.5"></a-sphere>
+        <!-- Bola flotante 7 -->
+        <a-sphere position="-3 1 -3" radius="0.8" color="#1F618D" float="speed: 1.3; height: 1.5"></a-sphere>
+        <!-- Bola flotante 8 -->
+        <a-sphere position="2 -0.5 -4" radius="0.5" color="#E67E22" float="speed: 1; height: 1.5"></a-sphere>
+        <!-- Bola flotante 9 -->
+        <a-sphere position="-2 0.5 -5" radius="0.9" color="#A569BD" float="speed: 1.5; height: 1.5"></a-sphere>
+        <!-- Bola flotante 10 -->
+        <a-sphere position="1 3 -5" radius="0.6" color="#DC7633" float="speed: 2; height: 1.5"></a-sphere>
+      </a-entity>
+
+      <!-- Cielo -->
+      <a-sky color="#ECECEC"></a-sky>
+    </a-scene>
+  </body>
+</html>
