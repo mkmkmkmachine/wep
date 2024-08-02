@@ -2,8 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Figuras Geométricas Flotando en A-Frame</title>
+    <title>Figuras Geométricas Interactivas en A-Frame</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@master/dist/aframe-master.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@master/dist/aframe-extras.min.js"></script>
     <script>
       AFRAME.registerComponent('float', {
         schema: {
@@ -24,29 +26,33 @@
       <!-- Crear muchas bolas y otras figuras geométricas flotantes -->
       <a-entity>
         <!-- Bola flotante 1 -->
-        <a-sphere position="-2 1 -3" radius="0.5" color="#4CC3D9" float="speed: 1; height: 1.5"></a-sphere>
+        <a-sphere position="-2 1 -3" radius="0.5" color="#4CC3D9" float="speed: 1; height: 1.5" grabbable></a-sphere>
         <!-- Bola flotante 2 -->
-        <a-sphere position="0 1.25 -5" radius="0.75" color="#EF2D5E" float="speed: 1.5; height: 1.5"></a-sphere>
+        <a-sphere position="0 1.25 -5" radius="0.75" color="#EF2D5E" float="speed: 1.5; height: 1.5" grabbable></a-sphere>
         <!-- Bola flotante 3 -->
-        <a-sphere position="2 1 -3" radius="0.5" color="#FFC65D" float="speed: 2; height: 1.5"></a-sphere>
+        <a-sphere position="2 1 -3" radius="0.5" color="#FFC65D" float="speed: 2; height: 1.5" grabbable></a-sphere>
         <!-- Cubo flotante 1 -->
-        <a-box position="-1 2 -4" depth="0.6" height="0.6" width="0.6" color="#FF5733" float="speed: 1.2; height: 1.5"></a-box>
+        <a-box position="-1 2 -4" depth="0.6" height="0.6" width="0.6" color="#FF5733" float="speed: 1.2; height: 1.5" grabbable></a-box>
         <!-- Cubo flotante 2 -->
-        <a-box position="1 1.5 -4" depth="0.5" height="0.5" width="0.5" color="#9B59B6" float="speed: 0.8; height: 1.5"></a-box>
+        <a-box position="1 1.5 -4" depth="0.5" height="0.5" width="0.5" color="#9B59B6" float="speed: 0.8; height: 1.5" grabbable></a-box>
         <!-- Cilindro flotante 1 -->
-        <a-cylinder position="3 2 -6" radius="0.3" height="1" color="#28B463" float="speed: 1.7; height: 1.5"></a-cylinder>
+        <a-cylinder position="3 2 -6" radius="0.3" height="1" color="#28B463" float="speed: 1.7; height: 1.5" grabbable></a-cylinder>
         <!-- Cilindro flotante 2 -->
-        <a-cylinder position="-3 1 -3" radius="0.4" height="0.8" color="#1F618D" float="speed: 1.3; height: 1.5"></a-cylinder>
+        <a-cylinder position="-3 1 -3" radius="0.4" height="0.8" color="#1F618D" float="speed: 1.3; height: 1.5" grabbable></a-cylinder>
         <!-- Tetraedro flotante 1 -->
-        <a-tetrahedron position="2 -0.5 -4" radius="0.5" color="#E67E22" float="speed: 1; height: 1.5"></a-tetrahedron>
+        <a-tetrahedron position="2 -0.5 -4" radius="0.5" color="#E67E22" float="speed: 1; height: 1.5" grabbable></a-tetrahedron>
         <!-- Tetraedro flotante 2 -->
-        <a-tetrahedron position="-2 0.5 -5" radius="0.6" color="#A569BD" float="speed: 1.5; height: 1.5"></a-tetrahedron>
+        <a-tetrahedron position="-2 0.5 -5" radius="0.6" color="#A569BD" float="speed: 1.5; height: 1.5" grabbable></a-tetrahedron>
         <!-- Dodecaedro flotante 1 -->
-        <a-dodecahedron position="1 3 -5" radius="0.6" color="#DC7633" float="speed: 2; height: 1.5"></a-dodecahedron>
+        <a-dodecahedron position="1 3 -5" radius="0.6" color="#DC7633" float="speed: 2; height: 1.5" grabbable></a-dodecahedron>
       </a-entity>
 
       <!-- Cámara con controles -->
-      <a-entity camera wasd-controls look-controls position="0 1.6 0"></a-entity>
+      <a-entity camera wasd-controls look-controls position="0 1.6 0">
+        <!-- Controladores para agarrar las figuras -->
+        <a-entity laser-controls="hand: left" raycaster="objects: .grabbable" super-hands="colliderEvent: raycaster-intersection; colliderEventProperty: els; grabStartButtons: triggerdown; grabEndButtons: triggerup"></a-entity>
+        <a-entity laser-controls="hand: right" raycaster="objects: .grabbable" super-hands="colliderEvent: raycaster-intersection; colliderEventProperty: els; grabStartButtons: triggerdown; grabEndButtons: triggerup"></a-entity>
+      </a-entity>
 
       <!-- Cielo -->
       <a-sky color="#ECECEC"></a-sky>
